@@ -1,14 +1,26 @@
-<?php 
+<?php
+if (isset($_GET['Date']) &&isset($_GET['Time']) && isset($_GET['Text'])) // РїСЂРѕРІРµСЂРєР° РЅР° Null
+{
+    $Date = $_GET['Date']; // Р”Р°С‚Р°
+    $Time = $_GET['Time']; // Р’СЂРµРјСЏ
+    $Text = $_GET['Text']; // РўРµРєСЃС‚
 
-$Date = $_GET['Date']; // Переменная содержит "Дату", которую мы чуть позже получим через AHK 
-$Time = $_GET['Time']; // Переменная содержит "Время", которое мы чуть позже получим через AHK 
-$Text = $_GET['Text']; // Переменная содержит "Текст", который мы чуть позже получим через AHK 
+    $file = 'developer.txt'; // РРјСЏ С„Р°Р№Р»Р° РєСѓРґР° РІСЃС‘ Р·Р°РїРёСЃС‹РІР°С‚
+    if (empty($file)) // РџСЂРѕРІРµСЂРєР° РЅР° Null
+    {
+  echo "No file name";
+    }
+    else
+    {
+  $current = file_get_contents($file);
+  $current .= "$Date - $Time\n$Text\n";
 
-$file = 'developer.txt'; // ВАЖНО: Переменная "file" содержит в себе название документа, в который будет сохраняться текст, в данном случае "developer.txt" 
-
-$current = file_get_contents($file); 
-$current .= "$Date - $Time\n$Text\n"; // Формат сохранения данных. В данном случае он таков: Дата - Время "НОВАЯ СТРОКА" Текст "НОВАЯ СТРОКА" 
-
-file_put_contents($file, $current); 
-
+  file_put_contents($file, $current);
+  echo "Text ADD";
+    }
+}
+else
+{
+    echo "Not Markers"
+}
 ?>
